@@ -1,4 +1,5 @@
 using DAL;
+using BLL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -6,8 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using TechnaminDemo.Helpers;
-using TechnaminDemo.Interfaces;
+//using TechnaminDemo.Helpers;
+//using TechnaminDemo.Interfaces;
 using TechnaminDemo.Services;
 
 namespace TechnaminDemo
@@ -26,8 +27,8 @@ namespace TechnaminDemo
         {
             services.AddCors();
             services.AddControllers();
-            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
-            services.AddScoped<IUserService, UserService>();
+            //services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+            //services.AddScoped<IUserService, UserService>();
 
             // for Entity
             services.AddDbContext<TechnaminDemoDbContext>(option => option.UseSqlServer("Data Source =.; Initial Catalog = Products; Integrated Security = True"));
@@ -37,7 +38,7 @@ namespace TechnaminDemo
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TechnaminDemo", Version = "v1" });
             });
 
-            //services.TypesInject();
+            services.ConfigureDI(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,7 +63,7 @@ namespace TechnaminDemo
             //    .AllowAnyMethod()
             //    .AllowAnyHeader());
 
-            app.UseMiddleware<JwtMiddleware>();
+            //app.UseMiddleware<JwtMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
