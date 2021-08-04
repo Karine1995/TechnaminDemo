@@ -34,6 +34,8 @@ namespace TechnaminDemo
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TechnaminDemo", Version = "v1" });
             });
+
+            services.TypesInject();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,14 +52,13 @@ namespace TechnaminDemo
 
             app.UseRouting();
 
-            //app.UseAuthorization();
-            app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
-          
-            app.UseCors(x => x
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
+            //app.UseCors(x => x
+            //    .AllowAnyOrigin()
+            //    .AllowAnyMethod()
+            //    .AllowAnyHeader());
 
             app.UseMiddleware<JwtMiddleware>();
 
