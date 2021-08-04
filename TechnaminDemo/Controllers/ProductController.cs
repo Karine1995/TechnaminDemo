@@ -1,4 +1,7 @@
-﻿using BLL.Mappers;
+﻿using BLL.Common;
+using BLL.Interfaces;
+using BLL.Mappers;
+using BLL.Services;
 using DAL;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,24 +16,53 @@ namespace TechnaminDemo.Controllers
 
     public class ProductController : ControllerBase
     {
-        private readonly IProductOperations _productOperations;
+        private readonly IProductService _productService;
 
-        public ProductController(IProductOperations productOperations)
+        public ProductController(IProductService productService)
         {
-            this._productOperations = productOperations;
+            this._productService = productService;
         }
+
         /// <summary>
-        ///Add new  Product  
+        /// Add product  
         /// </summary>
-        /// <param name="ProductForCreate"></param>
+        /// <param name="createProductInput"></param>
         /// <returns></returns>
         [HttpPost("AddProduct")]
         //[Authorize]
-        public async Task<IActionResult> AddAsync(CreateProductInput product)
+        public async Task<IActionResult> AddProductAsync(CreateProductInput createProductInput)
         {
-            var Product = await _productOperations.Create(product);
+            var product = await _productService.CreateAsync(createProductInput);
             //await _cashService.ClearCacheAsync(ProductCacheKeys.ReadAllProducts);
-            return Ok(Product);
+            return Ok("Product has been successfully created");
+        }
+
+        /// <summary>
+        /// Delete product  
+        /// </summary>
+        /// <param name="deleteProductInput"></param>
+        /// <returns></returns>
+        [HttpPost("DeleteProduct")]
+        //[Authorize]
+        public async Task<IActionResult> DeleteProductAsync(DeleteProductInput deleteProductInput)
+        {
+            var product = await _productService.DeleteAsync(deleteProductInput);
+            //await _cashService.ClearCacheAsync(ProductCacheKeys.ReadAllProducts);
+            return Ok("Product has been successfully deleted");
+        }
+
+        /// <summary>
+        /// Update product  
+        /// </summary>
+        /// <param name="updateProductInput"></param>
+        /// <returns></returns>
+        [HttpPost("UpdateProduct")]
+        //[Authorize]
+        public async Task<IActionResult> UpdateProductAsync(UpdateProductInput updateProductInput)
+        {
+            var product = await _productService.UpdateAsync(updateProductInput);
+            //await _cashService.ClearCacheAsync(ProductCacheKeys.ReadAllProducts);
+            return Ok("Product has been successfully updated");
         }
     }
 }

@@ -11,7 +11,7 @@ namespace TechnaminDemo.Services
     {
         public static void TypesInject(this IServiceCollection services)
         {
-            services.AddScoped<IProductOperations, ProductOperations>();
+            //services.AddScoped<IProductOperations, ProductOperations>();
             //services.AddScoped<IProductBL, ProductBL>();
         }
     }

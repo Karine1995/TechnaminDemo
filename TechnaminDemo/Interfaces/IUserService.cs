@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechnaminDemo.Models;
+using TechnaminDemo.Services;
 
 namespace TechnaminDemo.Interfaces
 {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using en = DAL.Entities;
+using TechnaminDemo.Services;
 
 namespace TechnaminDemo.Models
 {
@@ -15,7 +15,7 @@ namespace TechnaminDemo.Models
         public string Token { get; set; }
 
 
-        public AuthenticateUserResponse(en.User user, string token)
+        public AuthenticateUserResponse(User user, string token)
         {
             Id = user.Id;
             FirstName = user.FirstName;

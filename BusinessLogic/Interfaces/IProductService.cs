@@ -14,5 +14,7 @@ namespace BLL.Interfaces
         Product GetByIdAsync(int id);
 
         Task<ProductDTO> DeleteAsync(DeleteProductInput deleteProductInput);
+
+        Task<ProductDTO> UpdateAsync(UpdateProductInput updateProductInput);
     }
 }
