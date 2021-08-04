@@ -1,5 +1,4 @@
-﻿using BLL.Mappers;
-using DAL.Entities;
+﻿using DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,7 +17,7 @@ namespace DAL
 
         }
 
-        public DbSet<CreateProductInput> Products { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

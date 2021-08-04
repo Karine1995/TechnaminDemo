@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ProcessManagement.DTOs.Infrastructure
+namespace DTOs
 {
     public class BaseDTO
     {
