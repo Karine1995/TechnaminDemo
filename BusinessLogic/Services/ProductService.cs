@@ -32,21 +32,20 @@ namespace BLL.Services
         public Product GetByIdAsync(int id)
         {
             var Product = DbContext.Products.Where(m => m.Id == id)
-                                            .Include(m => m.Assignments)
                                             .FirstOrDefault();
             return Product;
         }
 
         public async Task<ProductDTO> DeleteAsync(DeleteProductInput deleteProductInput)
         {
-            var Product = deleteProductInput.MapTo<Product>();
-            var validator = new DeleteProductValidator(DbContext);
-            await validator.ValidateAsync(Product);
+            var product = deleteProductInput.MapTo<Product>();
+            //var validator = new DeleteProductValidator(DbContext);
+            //await validator.ValidateAsync(Product);
 
-            DbContext.Products.Remove(Product);
+            DbContext.Products.Remove(product);
             await DbContext.SaveChangesAsync();
 
-            return Product.MapTo<ProductDTO>();
+            return product.MapTo<ProductDTO>();
         }
     }
 }
