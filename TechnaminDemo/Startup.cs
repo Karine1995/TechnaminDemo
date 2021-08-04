@@ -1,5 +1,7 @@
+using DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,7 +30,7 @@ namespace TechnaminDemo
             services.AddScoped<IUserService, UserService>();
 
             // for Entity
-            //services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("dbConnection")));
+            services.AddDbContext<TechnaminDemoDbContext>(option => option.UseSqlServer("Data Source =.; Initial Catalog = Products; Integrated Security = True"));
 
             services.AddSwaggerGen(c =>
             {
