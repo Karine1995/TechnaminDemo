@@ -3,12 +3,14 @@ using BLL.Interfaces;
 using BLL.Mappers;
 using BLL.Services;
 using DAL;
-using Microsoft.AspNetCore.Authorization;
+//using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TechnaminDemo;
+
 
 namespace TechnaminDemo.Controllers
 {
@@ -29,7 +31,7 @@ namespace TechnaminDemo.Controllers
         /// <param name="createProductInput"></param>
         /// <returns></returns>
         [HttpPost("AddProduct")]
-        //[Authorize]
+        [Autorization]
         public async Task<IActionResult> AddProductAsync(CreateProductInput createProductInput)
         {
             var product = await _productService.CreateAsync(createProductInput);
@@ -43,7 +45,7 @@ namespace TechnaminDemo.Controllers
         /// <param name="deleteProductInput"></param>
         /// <returns></returns>
         [HttpPost("DeleteProduct")]
-        //[Authorize]
+        [Autorization]
         public async Task<IActionResult> DeleteProductAsync(DeleteProductInput deleteProductInput)
         {
             var product = await _productService.DeleteAsync(deleteProductInput);
@@ -57,7 +59,7 @@ namespace TechnaminDemo.Controllers
         /// <param name="updateProductInput"></param>
         /// <returns></returns>
         [HttpPost("UpdateProduct")]
-        //[Authorize]
+        [Autorization]
         public async Task<IActionResult> UpdateProductAsync(UpdateProductInput updateProductInput)
         {
             var product = await _productService.UpdateAsync(updateProductInput);

@@ -9,7 +9,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 //using TechnaminDemo.Helpers;
 //using TechnaminDemo.Interfaces;
-using TechnaminDemo.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Identity;
 
 namespace TechnaminDemo
 {
@@ -20,11 +23,13 @@ namespace TechnaminDemo
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            new ApplicationConfiguration(configuration).BuildApplicationSetting();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.Configure<JwtConfiguration>(Configuration.GetSection("JwtConfig"));
             services.AddCors();
             services.AddControllers();
             //services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
@@ -32,6 +37,30 @@ namespace TechnaminDemo
 
             // for Entity
             services.AddDbContext<TechnaminDemoDbContext>(option => option.UseSqlServer("Data Source =.; Initial Catalog = Products; Integrated Security = True"));
+
+            //services.AddAuthentication(options =>
+            //{
+            //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //})
+            //    .AddJwtBearer(jwt => {
+            //        var key = Encoding.ASCII.GetBytes(Configuration["JwtConfig:Secret"]);
+            //        jwt.SaveToken = true;
+            //        jwt.TokenValidationParameters = new TokenValidationParameters
+            //        {
+            //            ValidateIssuerSigningKey = true,
+            //            IssuerSigningKey = new SymmetricSecurityKey(key),
+            //            ValidateIssuer = false,
+            //            ValidateAudience = false,
+            //            ValidateLifetime = true,
+            //            RequireExpirationTime = false
+            //        };
+            //    });
+
+            //services.AddDefaultIdentity<IdentityUser>(
+            //    options => options.SignIn.RequireConfirmedAccount = true)
+            //    .AddEntityFrameworkStores<TechnaminDemoDbContext>();
 
             services.AddSwaggerGen(c =>
             {
