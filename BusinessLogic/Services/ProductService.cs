@@ -47,5 +47,20 @@ namespace BLL.Services
 
             return product.MapTo<ProductDTO>();
         }
+
+        public async Task<ProductDTO> UpdateAsync(UpdateProductInput updateProductInput)
+        {
+            var product = updateProductInput.MapTo<Product>();
+            //var validator = new DeleteProductValidator(DbContext);
+            //await validator.ValidateAsync(Product);
+
+            product = DbContext.Products.First(a => a.Id == updateProductInput.Id);
+            product.Price = updateProductInput.Price;
+            product.Available = updateProductInput.Available;
+            product.Description = updateProductInput.Description;
+            await DbContext.SaveChangesAsync();
+
+            return product.MapTo<ProductDTO>();
+        }
     }
 }
