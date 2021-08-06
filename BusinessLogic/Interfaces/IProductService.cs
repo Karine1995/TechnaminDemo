@@ -1,9 +1,8 @@
-﻿
-using BLL.Infrastructure;
-using DAL.Entities;
+﻿using BLL.Infrastructure;
+using Common.Models.Inputs.Products;
+using Common.Models.Outputs;
 using DTOs;
 using System.Threading.Tasks;
-using BLL.Common;
 
 namespace BLL.Interfaces
 {
@@ -11,9 +10,9 @@ namespace BLL.Interfaces
     {
         Task<ProductDTO> CreateAsync(CreateProductInput createProductInput);
 
-        Product GetByIdAsync(int id);
+        Task<GetProductOutput> GetByIdAsync(int id);
 
-        Task<ProductDTO> DeleteAsync(DeleteProductInput deleteProductInput);
+        Task<ProductDTO> DeleteAsync(int id);
 
         Task<ProductDTO> UpdateAsync(UpdateProductInput updateProductInput);
     }

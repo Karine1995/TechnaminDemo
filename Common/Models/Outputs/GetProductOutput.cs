@@ -1,6 +1,8 @@
-﻿namespace DAL.Entities
+﻿using System;
+
+namespace Common.Models.Outputs
 {
-    public class Product : BaseEntity
+    public class GetProductOutput
     {
         public int Id { get; set; }
 
@@ -10,7 +12,6 @@
 
         public bool Available { get; set; }
 
-        public string Description { get; set; }
-
+        public DateTime CreationDate { get; set; }
     }
 }

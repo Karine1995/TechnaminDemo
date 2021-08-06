@@ -1,15 +1,11 @@
-﻿
+﻿using BLL.Infrastructure;
 using BLL.Interfaces;
 using BLL.Services;
+using Common;
 using DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BLL
 {
@@ -17,7 +13,7 @@ namespace BLL
     {
         public static void ConfigureDI(IServiceCollection services, IConfiguration configuration)
         {
-            string connectionString = configuration.GetConnectionString("Data Source =.; Initial Catalog = Products; Integrated Security = True");
+            string connectionString = configuration.GetConnectionString(Constants.TechnaminDemoDb);
 
             services.AddDbContext<TechnaminDemoDbContext>(opt =>
             {
@@ -26,7 +22,7 @@ namespace BLL
 
             //services
             services.AddScoped<IProductService, ProductService>();
-            
+            services.AddScoped<IService, Service>();
         }
     }
 }

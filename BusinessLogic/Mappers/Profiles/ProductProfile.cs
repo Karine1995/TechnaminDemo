@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using BLL.Common;
-using BLL.Services;
+﻿using AutoMapper;
+using Common.Models.Inputs.Products;
 using DAL.Entities;
 using DTOs;
 
-namespace BLL.Mappers
+namespace BLL.Mappers.Profiles
 {
     internal class ProductProfile : Profile
     {

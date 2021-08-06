@@ -2,11 +2,6 @@
 using DAL.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL.EntityConfigurations
 {
@@ -31,7 +26,6 @@ namespace DAL.EntityConfigurations
                 .IsRequired()
                 .HasMaxLength(50);
                 
-
             builder.Property(u => u.Price)
                 .IsRequired()
                 .HasPrecision(20, 4);
@@ -40,6 +34,7 @@ namespace DAL.EntityConfigurations
                 .IsRequired();
 
             builder.Property(u => u.Description)
+                .IsRequired(false)
                 .HasMaxLength(1000);
 
         }

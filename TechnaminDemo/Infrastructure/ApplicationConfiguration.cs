@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 
-namespace TechnaminDemo
+namespace TechnaminDemo.Infrastructure
 {
-    public class ApplicationConfiguration
+    public class ApplicationConfiguration 
     {
         private readonly IConfiguration _configuration;
 

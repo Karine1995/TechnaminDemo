@@ -1,28 +1,20 @@
-﻿using BLL.Common;
-using BLL.Interfaces;
-using BLL.Mappers;
-using BLL.Services;
-using DAL;
-//using Microsoft.AspNetCore.Authorization;
+﻿using BLL.Interfaces;
+using Common.Models.Inputs.Products;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using TechnaminDemo;
-
+using TechnaminDemo.Filters;
 
 namespace TechnaminDemo.Controllers
 {
-    [Route("api/[controller]")]
-
+    [Route("api/[controller]/[action]")]
+    [Autorization]
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
 
         public ProductController(IProductService productService)
         {
-            this._productService = productService;
+            _productService = productService;
         }
 
         /// <summary>
@@ -30,12 +22,11 @@ namespace TechnaminDemo.Controllers
         /// </summary>
         /// <param name="createProductInput"></param>
         /// <returns></returns>
-        [HttpPost("AddProduct")]
-        [Autorization]
-        public async Task<IActionResult> AddProductAsync(CreateProductInput createProductInput)
+        [HttpPost]
+        public async Task<IActionResult> AddProduct(CreateProductInput createProductInput)
         {
-            var product = await _productService.CreateAsync(createProductInput);
-            //await _cashService.ClearCacheAsync(ProductCacheKeys.ReadAllProducts);
+            await _productService.CreateAsync(createProductInput);
+
             return Ok("Product has been successfully created");
         }
 
@@ -44,12 +35,11 @@ namespace TechnaminDemo.Controllers
         /// </summary>
         /// <param name="deleteProductInput"></param>
         /// <returns></returns>
-        [HttpPost("DeleteProduct")]
-        [Autorization]
-        public async Task<IActionResult> DeleteProductAsync(DeleteProductInput deleteProductInput)
+        [HttpDelete]
+        public async Task<IActionResult> DeleteProduct(int id)
         {
-            var product = await _productService.DeleteAsync(deleteProductInput);
-            //await _cashService.ClearCacheAsync(ProductCacheKeys.ReadAllProducts);
+            await _productService.DeleteAsync(id);
+
             return Ok("Product has been successfully deleted");
         }
 
@@ -58,12 +48,12 @@ namespace TechnaminDemo.Controllers
         /// </summary>
         /// <param name="updateProductInput"></param>
         /// <returns></returns>
-        [HttpPost("UpdateProduct")]
-        [Autorization]
-        public async Task<IActionResult> UpdateProductAsync(UpdateProductInput updateProductInput)
+        [HttpPut]
+        //[AllowAnonymous]
+        public async Task<IActionResult> UpdateProduct(UpdateProductInput updateProductInput)
         {
-            var product = await _productService.UpdateAsync(updateProductInput);
-            //await _cashService.ClearCacheAsync(ProductCacheKeys.ReadAllProducts);
+            await _productService.UpdateAsync(updateProductInput);
+
             return Ok("Product has been successfully updated");
         }
     }

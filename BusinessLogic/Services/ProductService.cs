@@ -1,10 +1,14 @@
-﻿using BLL.Common;
-using BLL.Infrastructure;
+﻿using BLL.Infrastructure;
 using BLL.Interfaces;
 using BLL.Mappers;
+using BLL.Validators.Products;
+using Common.Helpers;
+using Common.Models.Inputs.Products;
+using Common.Models.Outputs;
 using DAL;
 using DAL.Entities;
 using DTOs;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,8 +24,9 @@ namespace BLL.Services
         public async Task<ProductDTO> CreateAsync(CreateProductInput createProductInput)
         {
             var product = createProductInput.MapTo<Product>();
-            //var validator = new CreateProductValidator(DbContext);
-            //await validator.ValidateAsync(Product);
+
+            var validator = new CreateProductValidator(DbContext);
+            await validator.ValidateAsync(product);
 
             await DbContext.Products.AddAsync(product);
             await DbContext.SaveChangesAsync();
@@ -29,18 +34,23 @@ namespace BLL.Services
             return product.MapTo<ProductDTO>();
         }
 
-        public Product GetByIdAsync(int id)
-        {
-            var Product = DbContext.Products.Where(m => m.Id == id)
-                                            .FirstOrDefault();
-            return Product;
-        }
+        public async Task<GetProductOutput> GetByIdAsync(int id)
+            => await DbContext.Products.AsNoTracking()
+            .Select(p => new GetProductOutput
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Price = p.Price,
+                Available = p.Available,
+                CreationDate = p.CreationDate
+            }).Where(p => p.Id == id).FirstOrDefaultAsync();
 
-        public async Task<ProductDTO> DeleteAsync(DeleteProductInput deleteProductInput)
+        public async Task<ProductDTO> DeleteAsync(int id)
         {
-            var product = deleteProductInput.MapTo<Product>();
-            //var validator = new DeleteProductValidator(DbContext);
-            //await validator.ValidateAsync(Product);
+            var product = await DbContext.Products.FirstOrDefaultAsync(a => a.Id == id);
+
+            if (product == default)
+                ExceptionHelper.ThrowFaultException("Product not found!", StatusCodes.Status400BadRequest);
 
             DbContext.Products.Remove(product);
             await DbContext.SaveChangesAsync();
@@ -50,14 +60,15 @@ namespace BLL.Services
 
         public async Task<ProductDTO> UpdateAsync(UpdateProductInput updateProductInput)
         {
-            var product = updateProductInput.MapTo<Product>();
-            //var validator = new DeleteProductValidator(DbContext);
-            //await validator.ValidateAsync(Product);
+            var product = await DbContext.Products.FirstOrDefaultAsync(a => a.Id == updateProductInput.Id);
 
-            product = DbContext.Products.First(a => a.Id == updateProductInput.Id);
+            if (product == default)
+                ExceptionHelper.ThrowFaultException("Product not found!", StatusCodes.Status400BadRequest);
+
             product.Price = updateProductInput.Price;
             product.Available = updateProductInput.Available;
             product.Description = updateProductInput.Description;
+
             await DbContext.SaveChangesAsync();
 
             return product.MapTo<ProductDTO>();

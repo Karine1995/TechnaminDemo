@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31229.75
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechnaminDemo", "TechnaminDemo\TechnaminDemo.csproj", "{CA68ADB3-8370-4F33-A432-3E6D6E12562A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechnaminDemo", "TechnaminDemo\TechnaminDemo.csproj", "{CA68ADB3-8370-4F33-A432-3E6D6E12562A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BusinessLogic\BLL.csproj", "{007B31C6-4300-4454-B8D6-D6EB51DBF12F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL", "BusinessLogic\BLL.csproj", "{007B31C6-4300-4454-B8D6-D6EB51DBF12F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{D7F5BBB5-4C00-4C12-B3D9-E3EB5E493199}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{D7F5BBB5-4C00-4C12-B3D9-E3EB5E493199}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{3A4E4972-5072-40C6-97CF-9B51C4FA8D70}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{D7F5BBB5-4C00-4C12-B3D9-E3EB5E493199}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7F5BBB5-4C00-4C12-B3D9-E3EB5E493199}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7F5BBB5-4C00-4C12-B3D9-E3EB5E493199}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A4E4972-5072-40C6-97CF-9B51C4FA8D70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A4E4972-5072-40C6-97CF-9B51C4FA8D70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A4E4972-5072-40C6-97CF-9B51C4FA8D70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A4E4972-5072-40C6-97CF-9B51C4FA8D70}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
