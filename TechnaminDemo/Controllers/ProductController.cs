@@ -1,5 +1,6 @@
 ﻿using BLL.Interfaces;
 using Common.Models.Inputs.Products;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using TechnaminDemo.Filters;
@@ -49,12 +50,38 @@ namespace TechnaminDemo.Controllers
         /// <param name="updateProductInput"></param>
         /// <returns></returns>
         [HttpPut]
-        //[AllowAnonymous]
         public async Task<IActionResult> UpdateProduct(UpdateProductInput updateProductInput)
         {
             await _productService.UpdateAsync(updateProductInput);
 
             return Ok("Product has been successfully updated");
+        }
+
+        /// <summary>
+        /// Get product by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetProduct(int id)
+        {
+            var result = await _productService.GetByIdAsync(id);
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Get product by id
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetProduct()
+        {
+            var result = await _productService.GetAsync();
+
+            return Ok(result);
         }
     }
 }

@@ -10,6 +10,7 @@ using DAL.Entities;
 using DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -42,6 +43,7 @@ namespace BLL.Services
                 Name = p.Name,
                 Price = p.Price,
                 Available = p.Available,
+                Description = p.Description,
                 CreationDate = p.CreationDate
             }).Where(p => p.Id == id).FirstOrDefaultAsync();
 
@@ -73,5 +75,16 @@ namespace BLL.Services
 
             return product.MapTo<ProductDTO>();
         }
+
+        public async Task<List<GetProductOutput>> GetAsync()
+        =>  await DbContext.Products.AsNoTracking()
+            .Select(p => new GetProductOutput
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Price = p.Price,
+                Available = p.Available
+            }).ToListAsync();
+       
     }
 }

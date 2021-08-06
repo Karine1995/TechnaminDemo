@@ -2,6 +2,7 @@
 using Common.Models.Inputs.Products;
 using Common.Models.Outputs;
 using DTOs;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BLL.Interfaces
@@ -15,5 +16,7 @@ namespace BLL.Interfaces
         Task<ProductDTO> DeleteAsync(int id);
 
         Task<ProductDTO> UpdateAsync(UpdateProductInput updateProductInput);
+
+        Task<List<GetProductOutput>> GetAsync();
     }
 }

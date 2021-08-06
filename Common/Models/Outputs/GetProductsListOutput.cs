@@ -2,7 +2,7 @@
 
 namespace Common.Models.Outputs
 {
-    public class GetProductOutput
+    public class GetProductsListOutput
     {
         public int Id { get; set; }
 
@@ -11,9 +11,5 @@ namespace Common.Models.Outputs
         public decimal Price { get; set; }
 
         public bool Available { get; set; }
-
-        public string Description { get; set; }
-
-        public DateTime CreationDate { get; set; }
     }
 }
