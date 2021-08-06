@@ -64,7 +64,7 @@ namespace TechnaminDemo.Controllers
         /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> GetProduct(int id)
+        public async Task<IActionResult> GetById(int id)
         {
             var result = await _productService.GetByIdAsync(id);
 
@@ -72,14 +72,14 @@ namespace TechnaminDemo.Controllers
         }
 
         /// <summary>
-        /// Get product by id
+        /// Get products
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> GetProduct()
+        public async Task<IActionResult> GetAll()
         {
-            var result = await _productService.GetAsync();
+            var result = await _productService.GetAllAsync();
 
             return Ok(result);
         }
