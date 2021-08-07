@@ -17,6 +17,6 @@ namespace BLL.Interfaces
 
         Task<ProductDTO> UpdateAsync(UpdateProductInput updateProductInput);
 
-        Task<List<GetProductOutput>> GetAllAsync();
+        Task<List<GetProductsListOutput>> GetAllAsync();
     }
 }

@@ -8,7 +8,6 @@ using TechnaminDemo.Filters;
 namespace TechnaminDemo.Controllers
 {
     [Route("api/[controller]/[action]")]
-    [Autorization]
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
@@ -24,6 +23,7 @@ namespace TechnaminDemo.Controllers
         /// <param name="createProductInput"></param>
         /// <returns></returns>
         [HttpPost]
+        [Autorization]
         public async Task<IActionResult> AddProduct(CreateProductInput createProductInput)
         {
             await _productService.CreateAsync(createProductInput);
@@ -37,6 +37,7 @@ namespace TechnaminDemo.Controllers
         /// <param name="deleteProductInput"></param>
         /// <returns></returns>
         [HttpDelete]
+        [Autorization]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             await _productService.DeleteAsync(id);
@@ -50,6 +51,7 @@ namespace TechnaminDemo.Controllers
         /// <param name="updateProductInput"></param>
         /// <returns></returns>
         [HttpPut]
+        [Autorization]
         public async Task<IActionResult> UpdateProduct(UpdateProductInput updateProductInput)
         {
             await _productService.UpdateAsync(updateProductInput);
@@ -63,7 +65,6 @@ namespace TechnaminDemo.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> GetById(int id)
         {
             var result = await _productService.GetByIdAsync(id);
@@ -76,7 +77,6 @@ namespace TechnaminDemo.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> GetAll()
         {
             var result = await _productService.GetAllAsync();

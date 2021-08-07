@@ -76,9 +76,9 @@ namespace BLL.Services
             return product.MapTo<ProductDTO>();
         }
 
-        public async Task<List<GetProductOutput>> GetAllAsync()
+        public async Task<List<GetProductsListOutput>> GetAllAsync()
         =>  await DbContext.Products.AsNoTracking()
-            .Select(p => new GetProductOutput
+            .Select(p => new GetProductsListOutput
             {
                 Id = p.Id,
                 Name = p.Name,
